@@ -1,0 +1,16 @@
+{
+  "name": "HoneywellTruStabilitySPI",
+  "keywords": "sensor, pressure, spi",
+  "description": "Arduino library for communicating with Honeywell TruStability HSC or SSC pressure sensors over SPI",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/erikmwerner/honeywell-tru-stability.git"
+  },
+  "frameworks": "arduino",
+  "platforms":
+  [
+    "atmelavr",
+    "teensy"
+  ]
+}
