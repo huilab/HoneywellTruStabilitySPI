@@ -43,7 +43,7 @@ const float MAX_COUNT = 14745.6; ///< 14745 counts (90% of 2^14 counts or 0x3999
     @brief  Class for reading temperature and pressure from a Honeywell TruStability HSC or SSC sensor
 */
 /**************************************************************************/
-class TruStability_PressureSensor
+class TruStabilityPressureSensor
 {
     const uint8_t _SS_PIN;     ///< slave select pin (active low)
     const float _MIN_PRESSURE; ///< minimum calibrated output pressure (10%), in any units
@@ -57,37 +57,49 @@ class TruStability_PressureSensor
   public:
     /**************************************************************************/
     /*!
-    @brief  Constructs a new presssure sensor object.
-            The constructor defaults SPI settings to use 800 KHz SPI
-*/
+    @brief  Constructs a new presssure sensor object. min_pressure an max_pressure are 
+    taken from the datasheet and represent the 10% and 90% calibrated output pressures.
+    Subsequent calls to pressure() will return values in the 
+    units of min_pressure and max_pressure
+    
+    The constructor defaults SPI settings to use 800 KHz SPI
+    */
     /**************************************************************************/
-    TruStability_PressureSensor(uint8_t pin, float min_pressure, float max_pressure, SPISettings spi_settings = SPISettings(800000, MSBFIRST, SPI_MODE0))
+    TruStabilityPressureSensor(uint8_t pin, float min_pressure, float max_pressure, SPISettings spi_settings = SPISettings(800000, MSBFIRST, SPI_MODE0))
         : _SS_PIN(pin), _MIN_PRESSURE(min_pressure), _MAX_PRESSURE(max_pressure), _spi_settings(spi_settings) {}
 
     /**************************************************************************/
     /*!
     @brief  Initializes a pressure sensor object.
-            This function must be called in the Arduino setup() function
-*/
+            This function must be called in the Arduino setup() function.
+            SPI.begin() must be called seperately in setup() before the sensor
+            can be used
+    */
     /**************************************************************************/
     void begin()
     {
         pinMode(_SS_PIN, OUTPUT);
         digitalWrite(_SS_PIN, HIGH);
-        SPI.begin();
     }
 
     /**************************************************************************/
     /*!
-    @brief  Polls the sensor for new data.
-            The raw temperature and pressure variables are updated
-    @return   The status of the sensor. 0 is normal operation.
-*/
+    @brief  Polls the sensor for new data. The raw temperature and 
+    pressure variables are updated. There is no guarantee that the data retrieved
+    from the sensor is fresh data. Check the status 
+
+    @return   The status of the sensor
+    0 indicates normal operation, 
+    1 indicates the device is in command mode, 
+    2 indicates stale data,
+    3 indicates a diagnostic condition
+    */
     /**************************************************************************/
     uint8_t readSensor()
     {
         SPI.beginTransaction(_spi_settings);
         digitalWrite(_SS_PIN, LOW);
+        //SPI.transfer(_buf, 4);
         _buf[0] = SPI.transfer(0x00);
         _buf[1] = SPI.transfer(0x00);
         _buf[2] = SPI.transfer(0x00);
@@ -113,14 +125,13 @@ class TruStability_PressureSensor
         return status;
     }
 
-    // read the most recently polled
     /**************************************************************************/
     /*!
     @brief  Read the most recently polled pressure value.
         Update this value by calling readSensor() before reading.
     
     @return  The pressure value from the most recent reading in raw counts
-*/
+    */
     /**************************************************************************/
     int rawPressure() { return _pressure_count; }
 
@@ -130,7 +141,7 @@ class TruStability_PressureSensor
         Update this value by calling readSensor() before reading.
     
     @return  The temperature value from the most recent reading in raw counts
-*/
+    */
     /**************************************************************************/
     int rawTemperature() { return _temperature_count; }
 
@@ -140,7 +151,7 @@ class TruStability_PressureSensor
         Update this value by calling readSensor() before reading.
     
     @return  The pressure value from the most recent reading in units
-*/
+    */
     /**************************************************************************/
     float pressure() { return countsToPressure(_pressure_count, _MIN_PRESSURE, _MAX_PRESSURE); }
 
@@ -150,9 +161,8 @@ class TruStability_PressureSensor
         Update this value by calling readSensor() before reading.
     
     @return  The temperature value from the most recent reading in degrees C
-*/
+    */
     /**************************************************************************/
-
     float temperature() { return countsToTemperatures(_temperature_count); }
 
     /**************************************************************************/
@@ -167,12 +177,13 @@ class TruStability_PressureSensor
     @param    max_pressure
               The maximum calibrated output pressure for the sensor, in units of choice
     @return Pressure value in units of choice
-*/
+    */
     /**************************************************************************/
     static float countsToPressure(int counts, float min_pressure, float max_pressure)
     {
         return ((((float)counts - MIN_COUNT) * (max_pressure - min_pressure)) / (MAX_COUNT - MIN_COUNT)) + min_pressure;
     }
+
     /**************************************************************************/
     /*!
     @brief  Converts a digital temperature measurement in counts to temperature in C.
@@ -186,14 +197,6 @@ class TruStability_PressureSensor
     {
         return (((float)counts / 2047.0) * 200.0) - 50.0;
     }
-    /*
-    static float rawToPressure(int raw, int rawMin, int rawMax, float pMin, float pMax) {
-      return (float(raw - rawMin) * (pMax - pMin)) / (rawMax - rawMin) + pMin;
-    }
-    
-    static float rawToTemperature(int raw) {
-      return float(raw) * 200.0 / 2047 - 50.0;
-    }*/
 };
 
 #endif // End __HONEYWELL_TRUSTABILITY_SPI_H__ include guard

@@ -12,26 +12,23 @@
 #include <HoneywellTruStabilitySPI.h>
 
 #define SLAVE_SELECT_PIN SS
-TruStability_PressureSensor sensor( SLAVE_SELECT_PIN, -15.0, 15.0 );
+TruStabilityPressureSensor sensor( SLAVE_SELECT_PIN, -15.0, 15.0 );
 
 void setup() {
-
-  Serial.begin(115200);
-  sensor.begin();
-
+  Serial.begin(115200); // start Serial communication
+  SPI.begin(); // start SPI communication
+  sensor.begin(); // run sensor initialization
 }
 
 void loop() {
-
-  if( sensor.fetchData() == 0 ) {
+  // the sensor returns 0 when new data is ready
+  if( sensor.readSensor() == 0 ) {
     Serial.print( "temp [C]: " );
     Serial.print( sensor.temperature() );
     Serial.print( "\t pressure [psi]: " );
-    Serial.print( sensor.pressure() );
-    Serial.print( "\t time [µs]: " );
-    Serial.println( sensor.lastUpdateTime() );
+    Serial.println( sensor.pressure() );
   }
   
-  delay( 10 ); // Slow down sampling. This is just a test.
+  delay( 100 ); // Slow down sampling to 10 Hz. This is just a test.
 
 }
