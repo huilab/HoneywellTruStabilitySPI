@@ -49,7 +49,7 @@ class TruStabilityPressureSensor
     const float _MIN_PRESSURE; ///< minimum calibrated output pressure (10%), in any units
     const float _MAX_PRESSURE; ///< maximum calibrated output pressure (90%), in any units
 
-    SPISettings _spi_settings;
+    SPISettings _spi_settings;  ///< object to hold SPI configuration settings
     uint8_t _buf[4];            ///< buffer to hold sensor data
     int _pressure_count = 0;    ///< hold raw pressure data (14 - bit, 0 - 16384)
     int _temperature_count = 0; ///< hold raw temperature data (11 - bit, 0 - 2048)
@@ -62,7 +62,14 @@ class TruStabilityPressureSensor
     Subsequent calls to pressure() will return values in the 
     units of min_pressure and max_pressure
     
-    The constructor defaults SPI settings to use 800 KHz SPI
+    @param    pin
+              the slave select pin of the sensor
+    @param    min_pressure
+              the minimum calibrated output pressure
+    @param    max_pressure
+              the maximum calibrated output pressure
+    @param    spi_settings
+              SPI configuration settings. Default SPI settings use 800 KHz SPI
     */
     /**************************************************************************/
     TruStabilityPressureSensor(uint8_t pin, float min_pressure, float max_pressure, SPISettings spi_settings = SPISettings(800000, MSBFIRST, SPI_MODE0))
