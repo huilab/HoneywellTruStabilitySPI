@@ -4,9 +4,10 @@ Based on the Honeywell technical note at https://sensing.honeywell.com/spi-comms
 #### View the documentation
 https://huilab.github.io/HoneywellTruStabilitySPI/
 #### Install
-To download, click the Download Zip button. Move the folder to <arduinosketchfolder>/libraries/ folder, or in the Arduino IDE go to Sketch -> Include Library -> Add .ZIP Library
+To download, click the Download Zip button. In the Arduino IDE go to Sketch -> Include Library -> Add .ZIP Library. Or, install this library with the Arduino Library Manager.
+For details on installing libraries, see the guide at https://www.arduino.cc/en/Guide/Libraries#toc3
 #### Use
-See the handy example sketch. Include the library and declare a sensor:
+Include the library and declare a sensor:
 ```C
 #include <HoneywellTruStabilitySPI.h>
 // construct a +/- 15 PSI sensor using the default SPI slave select pin (SS)
@@ -25,3 +26,4 @@ if( sensor.readSensor() == 0 ) {
   float p = sensor.pressure();
 }
 ```
+For more details, see the handy example sketch.
