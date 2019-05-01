@@ -3,3 +3,4 @@ Doxyfile*
 doxygen_sqlite3.db
 html
 *pdf
+*.vscode
