@@ -7,10 +7,18 @@
     "type": "git",
     "url": "https://github.com/huilab/HoneywellTruStabilitySPI.git"
   },
+  "version": "1.0.0",
   "frameworks": "arduino",
   "platforms":
   [
     "atmelavr",
     "teensy"
+  ]
+  "authors" :
+  [
+     {
+       "name":"Erik Werner",
+       "email":"erikmwerner@gmail.com"
+     }
   ]
 }

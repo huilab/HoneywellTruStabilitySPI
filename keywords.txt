@@ -1,0 +1,14 @@
+#######################################
+# keywords.txt
+# Datatypes (KEYWORD1)
+# Methods and Functions (KEYWORD2)
+# Constants (LITERAL1)
+#######################################
+
+TruStabilityPressureSensor	KEYWORD1
+begin	KEYWORD2
+readSensor	KEYWORD2
+rawPressure	KEYWORD2
+rawTemperature	KEYWORD2
+pressure	KEYWORD2
+temperature	KEYWORD2
