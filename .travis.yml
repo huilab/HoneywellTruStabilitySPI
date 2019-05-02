@@ -12,7 +12,7 @@ env:
      - ARDUINO_IDE_VERSION="1.8.7"
      - PRETTYNAME="Honeywell TruStability SPI"
 # Optional, will default to "$TRAVIS_BUILD_DIR/Doxyfile"
-    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - DOXYFILE="$TRAVIS_BUILD_DIR/Doxyfile"
 
 before_install:
    - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
