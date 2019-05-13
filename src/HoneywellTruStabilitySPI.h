@@ -72,8 +72,9 @@ class TruStabilityPressureSensor
               SPI configuration settings. Default SPI settings use 800 KHz SPI
     */
     /**************************************************************************/
-    TruStabilityPressureSensor(uint8_t pin, float min_pressure, float max_pressure, SPISettings spi_settings = SPISettings(800000, MSBFIRST, SPI_MODE0))
-        : _SS_PIN(pin), _MIN_PRESSURE(min_pressure), _MAX_PRESSURE(max_pressure), _spi_settings(spi_settings) {}
+    TruStabilityPressureSensor(const uint8_t pin, const float min_pressure, 
+    const float max_pressure, SPISettings spi_settings = SPISettings(800000, MSBFIRST, SPI_MODE0))
+    : _SS_PIN(pin), _MIN_PRESSURE(min_pressure), _MAX_PRESSURE(max_pressure), _spi_settings(spi_settings) {}
 
     /**************************************************************************/
     /*!
@@ -103,14 +104,11 @@ class TruStabilityPressureSensor
     */
     /**************************************************************************/
     uint8_t readSensor()
-    {
+    {   
+        memset(_buf, 0x00, 4); // probably not necessary, sensor is half-duplex
         SPI.beginTransaction(_spi_settings);
         digitalWrite(_SS_PIN, LOW);
-        //SPI.transfer(_buf, 4);
-        _buf[0] = SPI.transfer(0x00);
-        _buf[1] = SPI.transfer(0x00);
-        _buf[2] = SPI.transfer(0x00);
-        _buf[3] = SPI.transfer(0x00);
+        SPI.transfer(_buf, 4);
         digitalWrite(_SS_PIN, HIGH);
         SPI.endTransaction();
 
@@ -140,7 +138,7 @@ class TruStabilityPressureSensor
     @return  The pressure value from the most recent reading in raw counts
     */
     /**************************************************************************/
-    int rawPressure() { return _pressure_count; }
+    int rawPressure() const { return _pressure_count; }
 
     /**************************************************************************/
     /*!
@@ -150,7 +148,7 @@ class TruStabilityPressureSensor
     @return  The temperature value from the most recent reading in raw counts
     */
     /**************************************************************************/
-    int rawTemperature() { return _temperature_count; }
+    int rawTemperature() const { return _temperature_count; }
 
     /**************************************************************************/
     /*!
@@ -160,7 +158,7 @@ class TruStabilityPressureSensor
     @return  The pressure value from the most recent reading in units
     */
     /**************************************************************************/
-    float pressure() { return countsToPressure(_pressure_count, _MIN_PRESSURE, _MAX_PRESSURE); }
+    float pressure() const { return countsToPressure(_pressure_count, _MIN_PRESSURE, _MAX_PRESSURE); }
 
     /**************************************************************************/
     /*!
@@ -170,7 +168,7 @@ class TruStabilityPressureSensor
     @return  The temperature value from the most recent reading in degrees C
     */
     /**************************************************************************/
-    float temperature() { return countsToTemperatures(_temperature_count); }
+    float temperature() const { return countsToTemperatures(_temperature_count); }
 
     /**************************************************************************/
     /*!
@@ -186,7 +184,7 @@ class TruStabilityPressureSensor
     @return Pressure value in units of choice
     */
     /**************************************************************************/
-    static float countsToPressure(int counts, float min_pressure, float max_pressure)
+    static float countsToPressure(const int counts, const float min_pressure, const float max_pressure)
     {
         return ((((float)counts - MIN_COUNT) * (max_pressure - min_pressure)) / (MAX_COUNT - MIN_COUNT)) + min_pressure;
     }
@@ -200,7 +198,7 @@ class TruStabilityPressureSensor
     @return Temperature value in degrees C
     */
     /**************************************************************************/
-    static float countsToTemperatures(int counts)
+    static float countsToTemperatures(const int counts)
     {
         return (((float)counts / 2047.0) * 200.0) - 50.0;
     }
