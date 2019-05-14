@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['countstopressure',['countsToPressure',['../class_tru_stability_pressure_sensor.html#af6b60f0dd74b0ec55c6c701b148628e8',1,'TruStabilityPressureSensor']]],
-  ['countstotemperatures',['countsToTemperatures',['../class_tru_stability_pressure_sensor.html#a66654ba367980b43a8c65c153a9acdd9',1,'TruStabilityPressureSensor']]]
+  ['countstopressure',['countsToPressure',['../class_tru_stability_pressure_sensor.html#a59bdacfcc6c311688551b8a713f386d2',1,'TruStabilityPressureSensor']]],
+  ['countstotemperatures',['countsToTemperatures',['../class_tru_stability_pressure_sensor.html#a2b15e21529cf7133ffea2da4f6faff3e',1,'TruStabilityPressureSensor']]]
 ];
