@@ -51,6 +51,13 @@ class TruStabilityPressureSensor
 
     SPISettings _spi_settings;  ///< object to hold SPI configuration settings
     uint8_t _buf[4];            ///< buffer to hold sensor data
+    uint8_t _status = 0;        ///< byte to hold status information.
+    // Status codes:
+    // status = 0 : normal operation
+    // status = 1 : device in command mode
+    // status = 2 : stale data
+    // status = 3 : diagnostic condition
+
     int _pressure_count = 0;    ///< hold raw pressure data (14 - bit, 0 - 16384)
     int _temperature_count = 0; ///< hold raw temperature data (11 - bit, 0 - 2048)
 
@@ -105,30 +112,40 @@ class TruStabilityPressureSensor
     /**************************************************************************/
     uint8_t readSensor()
     {   
-        memset(_buf, 0x00, 4); // probably not necessary, sensor is half-duplex
+        uint8_t count = 4; // transfer 4 bytes (the last two are only used by some sensors)
+        memset(_buf, 0x00, count); // probably not necessary, sensor is half-duplex
         SPI.beginTransaction(_spi_settings);
         digitalWrite(_SS_PIN, LOW);
-        SPI.transfer(_buf, 4);
+        SPI.transfer(_buf, count);
         digitalWrite(_SS_PIN, HIGH);
         SPI.endTransaction();
 
-        byte status = _buf[0] >> 6;
-        // Status codes:
-        // status = 0 : normal operation
-        // status = 1 : device in command mode
-        // status = 2 : stale data
-        // status = 3 : diagnostic condition
-
+        _status = _buf[0] >> 6 & 0x3;
+       
         // if device is normal and there is new data, bitmask and save the raw data
-        if (status == 0)
+        if (_status == 0)
         {
-            // 14 - bit pressure is the last 6 bits of byte 1 (high bits) & all of byte 2 (lowest 8 bits)
-            _pressure_count = (((int)(_buf[0] & 0x3f)) << 8) | ((int)(_buf[1]));
-            // 11 - bit temperature is all of byte 3 (lowest 8 bits) and the first three bites of byte 4
-            _temperature_count = ((((int)_buf[2]) << 8) | (int)_buf[3]) >> 5;
+            // 14 - bit pressure is the last 6 bits of byte 0 (high bits) & all of byte 1 (lowest 8 bits)
+            _pressure_count = ( (uint16_t)(_buf[0]) << 8 & 0x3F00 ) | ( (uint16_t)(_buf[1]) & 0xFF );
+            // 11 - bit temperature is all of byte 2 (lowest 8 bits) and the first three bits of byte 3
+            _temperature_count = ( ((uint16_t)(_buf[2]) << 3) & 0x7F8 ) | ( ( (uint16_t)(_buf[3]) >> 5) & 0x7 );
         }
-        return status;
+        
+        return _status;
     }
+    /**************************************************************************/
+    /*!
+    @brief  Read the most recent status information for the sensor
+        This value is updated by readSensor()
+    
+    @return  The most recent status information
+    0 indicates normal operation, 
+    1 indicates the device is in command mode, 
+    2 indicates stale data,
+    3 indicates a diagnostic condition
+    */
+    /**************************************************************************/
+    uint8_t status() const {return _status;}
 
     /**************************************************************************/
     /*!
