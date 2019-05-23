@@ -84,6 +84,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a452bbac971474235e3bbfbbf39fc39e4"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4">readSensor</a> ()</td></tr>
 <tr class="memdesc:a452bbac971474235e3bbfbbf39fc39e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status.  <a href="#a452bbac971474235e3bbfbbf39fc39e4">More...</a><br /></td></tr>
 <tr class="separator:a452bbac971474235e3bbfbbf39fc39e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb5d43cf994eec227da19945d77048de"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#acb5d43cf994eec227da19945d77048de">status</a> () const</td></tr>
+<tr class="memdesc:acb5d43cf994eec227da19945d77048de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the most recent status information for the sensor This value is updated by <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a>  <a href="#acb5d43cf994eec227da19945d77048de">More...</a><br /></td></tr>
+<tr class="separator:acb5d43cf994eec227da19945d77048de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab08b01a811bbe4730a43044c3fe0ab27"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#ab08b01a811bbe4730a43044c3fe0ab27">rawPressure</a> () const</td></tr>
 <tr class="memdesc:ab08b01a811bbe4730a43044c3fe0ab27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the most recently polled pressure value. Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading.  <a href="#ab08b01a811bbe4730a43044c3fe0ab27">More...</a><br /></td></tr>
 <tr class="separator:ab08b01a811bbe4730a43044c3fe0ab27"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,6 +197,34 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. </p>
 <dl class="section return"><dt>Returns</dt><dd>The status of the sensor 0 indicates normal operation, 1 indicates the device is in command mode, 2 indicates stale data, 3 indicates a diagnostic condition </dd></dl>
+
+</div>
+</div>
+<a id="acb5d43cf994eec227da19945d77048de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb5d43cf994eec227da19945d77048de">&#9670;&nbsp;</a></span>status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t TruStabilityPressureSensor::status </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the most recent status information for the sensor This value is updated by <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>The most recent status information 0 indicates normal operation, 1 indicates the device is in command mode, 2 indicates stale data, 3 indicates a diagnostic condition </dd></dl>
 
 </div>
 </div>
