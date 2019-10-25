@@ -169,8 +169,10 @@ class TruStabilityPressureSensor
 
     /**************************************************************************/
     /*!
-    @brief  Read the most recently polled pressure value converted to units
-        Update this value by calling readSensor() before reading.
+    @brief  Read the most recently polled pressure value converted to the units
+        specified in the constructor (minimum and maximum calibrated output 
+        values). Update this value by calling readSensor() before reading.
+        To avoid using floating point number, /sa rawPressure.
     
     @return  The pressure value from the most recent reading in units
     */
@@ -179,8 +181,9 @@ class TruStabilityPressureSensor
 
     /**************************************************************************/
     /*!
-    @brief  Read the most recently polled temperature value.
+    @brief  Read the most recently polled temperature value in degress celcius.
         Update this value by calling readSensor() before reading.
+        To avoid using floating point number, /sa rawPressure.
     
     @return  The temperature value from the most recent reading in degrees C
     */
