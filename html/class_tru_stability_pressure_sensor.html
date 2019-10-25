@@ -75,7 +75,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac62a8dc94a0bb186fe9683b5f08dfd40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#ac62a8dc94a0bb186fe9683b5f08dfd40">TruStabilityPressureSensor</a> (const uint8_t pin, const float min_pressure, const float max_pressure, SPISettings spi_settings=SPISettings(800000, MSBFIRST, SPI_MODE0))</td></tr>
-<tr class="memdesc:ac62a8dc94a0bb186fe9683b5f08dfd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new presssure sensor object. min_pressure an max_pressure are taken from the datasheet and represent the 10% and 90% calibrated output pressures. Subsequent calls to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to units Update this value by calling readSens...">pressure()</a> will return values in the units of min_pressure and max_pressure.  <a href="#ac62a8dc94a0bb186fe9683b5f08dfd40">More...</a><br /></td></tr>
+<tr class="memdesc:ac62a8dc94a0bb186fe9683b5f08dfd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new presssure sensor object. min_pressure an max_pressure are taken from the datasheet and represent the 10% and 90% calibrated output pressures. Subsequent calls to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to the units specified in the constructor (min...">pressure()</a> will return values in the units of min_pressure and max_pressure.  <a href="#ac62a8dc94a0bb186fe9683b5f08dfd40">More...</a><br /></td></tr>
 <tr class="separator:ac62a8dc94a0bb186fe9683b5f08dfd40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad26bce66a3b7ae02b30093c270f57966"><td class="memItemLeft" align="right" valign="top"><a id="ad26bce66a3b7ae02b30093c270f57966"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#ad26bce66a3b7ae02b30093c270f57966">begin</a> ()</td></tr>
@@ -94,19 +94,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a46929dcc6baed0be8d2f2fbdd759f570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the most recently polled temperature value. Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading.  <a href="#a46929dcc6baed0be8d2f2fbdd759f570">More...</a><br /></td></tr>
 <tr class="separator:a46929dcc6baed0be8d2f2fbdd759f570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a713887237d486fe9472d2b32b97469e8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8">pressure</a> () const</td></tr>
-<tr class="memdesc:a713887237d486fe9472d2b32b97469e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the most recently polled pressure value converted to units Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading.  <a href="#a713887237d486fe9472d2b32b97469e8">More...</a><br /></td></tr>
+<tr class="memdesc:a713887237d486fe9472d2b32b97469e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the most recently polled pressure value converted to the units specified in the constructor (minimum and maximum calibrated output values). Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading. To avoid using floating point number, /sa rawPressure.  <a href="#a713887237d486fe9472d2b32b97469e8">More...</a><br /></td></tr>
 <tr class="separator:a713887237d486fe9472d2b32b97469e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6338f6af2764513c1be1fcd0ed9b85f7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#a6338f6af2764513c1be1fcd0ed9b85f7">temperature</a> () const</td></tr>
-<tr class="memdesc:a6338f6af2764513c1be1fcd0ed9b85f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the most recently polled temperature value. Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading.  <a href="#a6338f6af2764513c1be1fcd0ed9b85f7">More...</a><br /></td></tr>
+<tr class="memdesc:a6338f6af2764513c1be1fcd0ed9b85f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the most recently polled temperature value in degress celcius. Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading. To avoid using floating point number, /sa rawPressure.  <a href="#a6338f6af2764513c1be1fcd0ed9b85f7">More...</a><br /></td></tr>
 <tr class="separator:a6338f6af2764513c1be1fcd0ed9b85f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a59bdacfcc6c311688551b8a713f386d2"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#a59bdacfcc6c311688551b8a713f386d2">countsToPressure</a> (const int counts, const float min_pressure, const float max_pressure)</td></tr>
-<tr class="memdesc:a59bdacfcc6c311688551b8a713f386d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a digital pressure measurement in counts to pressure. The output temperature will be in the units of min_pressure and max_pressure. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to units Update this value by calling readSens...">pressure()</a>  <a href="#a59bdacfcc6c311688551b8a713f386d2">More...</a><br /></td></tr>
+<tr class="memdesc:a59bdacfcc6c311688551b8a713f386d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a digital pressure measurement in counts to pressure. The output temperature will be in the units of min_pressure and max_pressure. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to the units specified in the constructor (min...">pressure()</a>  <a href="#a59bdacfcc6c311688551b8a713f386d2">More...</a><br /></td></tr>
 <tr class="separator:a59bdacfcc6c311688551b8a713f386d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b15e21529cf7133ffea2da4f6faff3e"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tru_stability_pressure_sensor.html#a2b15e21529cf7133ffea2da4f6faff3e">countsToTemperatures</a> (const int counts)</td></tr>
-<tr class="memdesc:a2b15e21529cf7133ffea2da4f6faff3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a digital temperature measurement in counts to temperature in C. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a6338f6af2764513c1be1fcd0ed9b85f7" title="Read the most recently polled temperature value. Update this value by calling readSensor() before rea...">temperature()</a>  <a href="#a2b15e21529cf7133ffea2da4f6faff3e">More...</a><br /></td></tr>
+<tr class="memdesc:a2b15e21529cf7133ffea2da4f6faff3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a digital temperature measurement in counts to temperature in C. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a6338f6af2764513c1be1fcd0ed9b85f7" title="Read the most recently polled temperature value in degress celcius. Update this value by calling read...">temperature()</a>  <a href="#a2b15e21529cf7133ffea2da4f6faff3e">More...</a><br /></td></tr>
 <tr class="separator:a2b15e21529cf7133ffea2da4f6faff3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -158,7 +158,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a new presssure sensor object. min_pressure an max_pressure are taken from the datasheet and represent the 10% and 90% calibrated output pressures. Subsequent calls to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to units Update this value by calling readSens...">pressure()</a> will return values in the units of min_pressure and max_pressure. </p>
+<p>Constructs a new presssure sensor object. min_pressure an max_pressure are taken from the datasheet and represent the 10% and 90% calibrated output pressures. Subsequent calls to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to the units specified in the constructor (min...">pressure()</a> will return values in the units of min_pressure and max_pressure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>the slave select pin of the sensor </td></tr>
@@ -307,7 +307,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Read the most recently polled pressure value converted to units Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading. </p>
+<p>Read the most recently polled pressure value converted to the units specified in the constructor (minimum and maximum calibrated output values). Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading. To avoid using floating point number, /sa rawPressure. </p>
 <dl class="section return"><dt>Returns</dt><dd>The pressure value from the most recent reading in units </dd></dl>
 
 </div>
@@ -335,7 +335,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Read the most recently polled temperature value. Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading. </p>
+<p>Read the most recently polled temperature value in degress celcius. Update this value by calling <a class="el" href="class_tru_stability_pressure_sensor.html#a452bbac971474235e3bbfbbf39fc39e4" title="Polls the sensor for new data. The raw temperature and pressure variables are updated. There is no guarantee that the data retrieved from the sensor is fresh data. Check the status. ">readSensor()</a> before reading. To avoid using floating point number, /sa rawPressure. </p>
 <dl class="section return"><dt>Returns</dt><dd>The temperature value from the most recent reading in degrees C </dd></dl>
 
 </div>
@@ -380,7 +380,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Converts a digital pressure measurement in counts to pressure. The output temperature will be in the units of min_pressure and max_pressure. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to units Update this value by calling readSens...">pressure()</a> </p>
+<p>Converts a digital pressure measurement in counts to pressure. The output temperature will be in the units of min_pressure and max_pressure. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a713887237d486fe9472d2b32b97469e8" title="Read the most recently polled pressure value converted to the units specified in the constructor (min...">pressure()</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">counts</td><td>The raw pressure value </td></tr>
@@ -417,7 +417,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Converts a digital temperature measurement in counts to temperature in C. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a6338f6af2764513c1be1fcd0ed9b85f7" title="Read the most recently polled temperature value. Update this value by calling readSensor() before rea...">temperature()</a> </p>
+<p>Converts a digital temperature measurement in counts to temperature in C. This is a helper function to <a class="el" href="class_tru_stability_pressure_sensor.html#a6338f6af2764513c1be1fcd0ed9b85f7" title="Read the most recently polled temperature value in degress celcius. Update this value by calling read...">temperature()</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">counts</td><td>The raw temperature value </td></tr>
